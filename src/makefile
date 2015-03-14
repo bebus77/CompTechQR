@@ -1,14 +1,17 @@
-TARGET=qr
+TARGET=eigenQR
 CC=gcc
 LD=gcc
 CFLAGS= -Werror -Wall -std=c99
 LDFLAGS=
+LDLIBS= -lm
 
 .PHONY: default all clean
 
-HEADERS = matlib.h
+HEADERS = matlib.h \
+					eigenQR.h
 
 OBJECTS = main.o  \
+					eigenQR.o \
 					matlib.o
 
 default: $(TARGET)
@@ -16,10 +19,10 @@ default: $(TARGET)
 all: default
 
 %.o: %.c $(HEADERS)
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -c $< $(LDLIBS) -o $@
 
 $(TARGET): $(OBJECTS)
-		$(LD) $(LDFLAGS) $(OBJECTS) -o $@  
+		$(LD) $(LDFLAGS) $(OBJECTS) $(LDLIBS) -o $@  
 
 clean:
 		-rm -f *.o
