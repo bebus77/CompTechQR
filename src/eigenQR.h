@@ -13,7 +13,7 @@
 void qr_iterations(void);
 
 /** 
- * Performs QR decomposition. 
+ * Performs QR decomposition using Gram-Schmidt process. 
  */
 void qr_decomposition(matrix* u, matrix* q, matrix* r);
 

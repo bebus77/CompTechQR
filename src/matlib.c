@@ -41,17 +41,16 @@ l2_norm_of_column(matrix *a, size_t col)
 }
 
 float 
-dot_columns(matrix* a, size_t col_1, size_t col_2)
+dot_columns(matrix* a, size_t col_a, matrix* b, size_t col_b)
 {
-  assert(a != NULL);
-  assert(col_1 >= 0 && col_1 < a->n && col_2 >= 0 && col_2 < a->n);
+  assert(a != NULL && b != NULL && a->m == b->m);
 
   float dot = 0;
   size_t i;
 
   for (i = 0; i < a->m; i++)
   {
-    dot += a->data[i][col_1] * a->data[i][col_2];
+    dot += a->data[i][col_a] * b->data[i][col_b];
   }
 
   return dot;
@@ -86,6 +85,18 @@ col_multiply_substract(matrix* a, size_t col_a,
   for (i = 0; i < a->m; i++)
   {
     a->data[i][col_a] = b->data[i][col_b] - scalar * c->data[i][col_c];
+  }
+}
+
+void assign_column(matrix* a, size_t col_a, matrix* b, size_t col_b)
+{
+  assert(a != NULL && b != NULL && a->m == a->n);
+
+  size_t i;
+
+  for (i = 0; i < a->m; i++)
+  {
+    a->data[i][col_a] = b->data[i][col_b];
   }
 }
 
@@ -143,6 +154,37 @@ destroy_matrix(matrix* mat)
   free(mat->data);
   /* Free the matrix struct. */
   free(mat);
+}
+
+ void read_matrix_data(FILE* fp, matrix* mat)
+ {
+  assert(fp != NULL && mat != NULL);
+
+  size_t i, j;
+
+  for (i = 0; i < mat->m; i++)
+  {
+    for (j = 0; j < mat->n; j++)
+    {
+      fscanf(fp, "%f", &(mat->data[i][j]));
+    }
+  }
+ }
+
+void print_matrix_data(FILE* fp, matrix* mat)
+{
+  assert(fp != NULL && mat != NULL);
+
+  size_t i, j;
+
+  for (i = 0; i < mat->m; i++)
+  {
+    for (j = 0; j < mat->n; j++)
+    {
+      fprintf(fp, "% f ", mat->data[i][j]);
+    }
+    fprintf(fp, "\n");
+  } 
 }
 
 struct vector*
