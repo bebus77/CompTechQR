@@ -1,7 +1,7 @@
 TARGET=eigenQR
 CC=gcc
 LD=gcc
-CFLAGS= -Werror -Wall -std=c99
+CFLAGS= -Wall -std=c99
 LDFLAGS=
 LDLIBS= -lm
 

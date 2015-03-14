@@ -43,7 +43,9 @@ void print_matrix_data(FILE* fp, matrix* mat);
  */
 void matrix_mul(matrix* a, matrix* b, matrix* c);
 
-/* Calculates the l2 norm of column vector of a. */
+/** 
+ * Calculates the l2 norm of column vector of a. 
+ */
 float l2_norm_of_column(matrix* a, size_t col);
 
 /**
@@ -69,5 +71,15 @@ void col_multiply_substract(matrix* a, size_t col_a,
  * Assigns jth column of b to ith column of a.
  */
 void assign_column(matrix* a, size_t col_a, matrix* b, size_t col_b);
+
+/**
+ * Assigns values of elements of b to elements of a.
+ */
+void assign_matrix(matrix* a, matrix* b);
+
+/**
+ * Fills matrix with zeroes.
+ */
+ void fill_zero(matrix* a);
 
 #endif /* src/matlib.h */

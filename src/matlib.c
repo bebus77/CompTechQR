@@ -12,6 +12,9 @@ matrix_mul(matrix* a, matrix* b, matrix* c)
   
   size_t i, j, k;
 
+  /* Clear the result matrix. */
+  fill_zero(c);
+
   for (i = 0; i < a->m; i++)
   {
     for (j = 0; j < b->n; j++)
@@ -27,7 +30,7 @@ matrix_mul(matrix* a, matrix* b, matrix* c)
 float
 l2_norm_of_column(matrix *a, size_t col)
 {
-  assert(a != NULL && col >= 0 && col < a->n);
+  assert(a != NULL);
 
   size_t i;
   float norm = 0;
@@ -59,7 +62,7 @@ dot_columns(matrix* a, size_t col_a, matrix* b, size_t col_b)
 void
 mul_col_by_scalar(matrix* a, size_t col, float scalar)
 {
-  assert(a != NULL && col >= 0 && col < a->n);
+  assert(a != NULL);
 
   size_t i;
 
@@ -75,9 +78,7 @@ col_multiply_substract(matrix* a, size_t col_a,
                        float scalar, 
                        matrix *c, size_t col_c)
 {
-  assert(a != NULL && col_a >= 0 && col_a < a->n);
-  assert(b != NULL && col_b >= 0 && col_b < b->n);
-  assert(c != NULL && col_c >= 0 && col_c < c->n);
+  assert(a != NULL && b != NULL && c != NULL);
   assert(a->m == b->m && b->m == c->m);
 
   size_t i;
@@ -98,6 +99,38 @@ assign_column(matrix* a, size_t col_a, matrix* b, size_t col_b)
   for (i = 0; i < a->m; i++)
   {
     a->data[i][col_a] = b->data[i][col_b];
+  }
+}
+
+void
+assign_matrix(matrix* a, matrix* b)
+{
+  assert(a != NULL && b != NULL && a->m == b->m && a->n == b->n);
+
+  size_t i, j;
+
+  for (i = 0; i < a->m; i++)
+  {
+    for (j = 0; j < a->n; j++)
+    {
+      a->data[i][j] = b->data[i][j];
+    }
+  }
+}
+
+void
+fill_zero(matrix* a)
+{
+  assert(a != NULL);
+
+  size_t i, j;
+
+  for (i = 0; i < a->m; i++)
+  {
+    for (j = 0; j < a->n; j++)
+    {
+      a->data[i][j] = 0.0f;
+    }
   }
 }
 
