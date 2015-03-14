@@ -88,7 +88,8 @@ col_multiply_substract(matrix* a, size_t col_a,
   }
 }
 
-void assign_column(matrix* a, size_t col_a, matrix* b, size_t col_b)
+void 
+assign_column(matrix* a, size_t col_a, matrix* b, size_t col_b)
 {
   assert(a != NULL && b != NULL && a->m == a->n);
 
@@ -156,7 +157,8 @@ destroy_matrix(matrix* mat)
   free(mat);
 }
 
- void read_matrix_data(FILE* fp, matrix* mat)
+ void 
+ read_matrix_data(FILE* fp, matrix* mat)
  {
   assert(fp != NULL && mat != NULL);
 
@@ -171,7 +173,8 @@ destroy_matrix(matrix* mat)
   }
  }
 
-void print_matrix_data(FILE* fp, matrix* mat)
+void 
+print_matrix_data(FILE* fp, matrix* mat)
 {
   assert(fp != NULL && mat != NULL);
 
@@ -185,31 +188,4 @@ void print_matrix_data(FILE* fp, matrix* mat)
     }
     fprintf(fp, "\n");
   } 
-}
-
-struct vector*
-new_vector(size_t n)
-{
-  assert(n >= 0);
-  
-  /* Allocate memory for the vector struct. */
-  struct vector* v = (struct vector*) malloc(sizeof(struct vector));
-  if (v == NULL)
-  {
-    perror("Failed to allocate memory for the vector struct.");
-    exit(EXIT_FAILURE);
-  }
-
-  /* Set the size. */
-  v->n = n;
-
-  /* Allocate memory for data. */
-  v->data = (float*) malloc(sizeof(float) * n);
-  if (v->data == NULL)
-  {
-    perror("Failed to allocate memory for data.");
-    exit(EXIT_FAILURE);
-  }
-
-  return v;
 }

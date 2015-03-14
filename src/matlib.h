@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 /** 
- * Matrix & vector library. 
+ * Matrix library. 
  */
 
 /**
@@ -17,15 +17,6 @@ typedef struct
   size_t n;      /* Number of columns. */
   float** data;  /* Elements. */
 } matrix;
-
-/**
- * Vector representation. 
- */
-struct vector
-{
-  size_t n;     /* Dimension. */
-  float* data;  /* Elements. */
-};
 
 /** 
  * Allocates matrix of size m x n on the heap. 
@@ -46,16 +37,6 @@ void destroy_matrix(matrix* mat);
  * Prints matrix data to fp.
  */
 void print_matrix_data(FILE* fp, matrix* mat);
-
-/**
- * Allocates vector of size n. 
- */
-struct vector* new_vector(size_t n);
-
-/** 
- * Frees the memory used by the vector v. 
- */
-void destroy_vector(struct vector* v);
 
 /** 
  * Multiplies a by b and stores the resulting matrix in c. 
