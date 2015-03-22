@@ -58,10 +58,6 @@ qr_decomposition(matrix* u, matrix* q, matrix* r)
 
   size_t i, j;
 
-  /* Zero q and r. */
-  fill_zero(q);
-  fill_zero(r);
-
   for (i = 0; i < u->n; i++)
   {
     /* q_i = u_i */

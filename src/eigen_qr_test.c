@@ -12,7 +12,7 @@
  */
 
 /* Threshold used for equality comparisons. */
-static const float TRESHOLD = 0.000001f;
+static const float TRESHOLD = 0.0001f;
 
 static void run_qr_decom_tests(void);
 static void run_qr_iter_tests(void);
@@ -123,7 +123,7 @@ void run_qr_iter_tests(void)
     qr_iterations(a, a_k);
 
     /* Extract the eigen values obtained. */
-    extract_diagonal(a_k, eigen_values, m);
+    extract_diagonal(a_k, eigen_values, m);   
 
     /* Check the rsult. */
     assert(equal_vector(expected_eigen_values, m, eigen_values, m, TRESHOLD));

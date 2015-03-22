@@ -12,13 +12,11 @@ matrix_mul(matrix* a, matrix* b, matrix* c)
   
   size_t i, j, k;
 
-  /* Clear the result matrix. */
-  fill_zero(c);
-
   for (i = 0; i < a->m; i++)
   {
     for (j = 0; j < b->n; j++)
     {
+      c->data[i][j] = 0.0f;
       for (k = 0; k < a->n; k++)
       {
         c->data[i][j] += a->data[i][k] * b->data[k][j]; 
@@ -169,6 +167,9 @@ new_matrix(size_t m, size_t n)
       exit(EXIT_FAILURE);
     }
   }
+
+  /* Set entries to zeroes. */
+  fill_zero(mat);
 
   return mat;
 }
