@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "matlib.h"
-#include "eigenQR.h"
+#include "eigen_qr.h"
 
 /**
  * Reads two matrices from the file and:

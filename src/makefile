@@ -1,5 +1,5 @@
-EXECUTABLE=eigenQR
-TEST_EXECUTABLE=eigenQR_test
+EXECUTABLE=eigen_qr
+TEST_EXECUTABLE=eigen_qr_test
 CC=gcc
 LD=gcc
 CFLAGS= -Wall -std=c99
@@ -9,14 +9,14 @@ LDLIBS= -lm
 .PHONY: default all clean target tests
 
 HEADERS = matlib.h \
-					eigenQR.h
+					eigen_qr.h
 
-COMMON_OBJECTS = eigenQR.o \
+COMMON_OBJECTS = eigen_qr.o \
 								 matlib.o
 
 EXECUTABLE_OBJECTS = main.o
 
-TEST_OBJECTS = eigenQR_test.o
+TEST_OBJECTS = eigen_qr_test.o
 
 default: target tests
 

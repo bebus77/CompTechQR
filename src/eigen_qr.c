@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdbool.h>
 
-#include "eigenQR.h"
+#include "eigen_qr.h"
 
 /* Convergence treshold. */
 static float TRESHOLD = 0.00001;

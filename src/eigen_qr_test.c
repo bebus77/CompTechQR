@@ -3,7 +3,7 @@
 #include <assert.h>
 
 #include "matlib.h"
-#include "eigenQR.h"
+#include "eigen_qr.h"
 
 /**
  * Test module. Test data is located in test_data directory.
@@ -11,6 +11,7 @@
  * was used to calculate the expected results.
  */
 
+/* Threshold used for equality comparisons. */
 static const float TRESHOLD = 0.000001f;
 
 static void run_qr_decom_tests(void);
@@ -60,12 +61,6 @@ void run_qr_decom_tests(void)
 
     /* Perform qr decomposition. */
     qr_decomposition(u, q, r);
-
-    //printf("Expected:\n");
-    //print_matrix_data(stdout, expected_q);
-    //printf("Actual:\n");
-    //print_matrix_data(stdout, q);
-
 
     /* Check the result. */
     assert(equal_matrix(expected_q, q, TRESHOLD));
@@ -146,7 +141,6 @@ int main(void)
 {
   /* Test qr decomposition. */
   run_qr_decom_tests();
-
   /* Test qr iterations. */
   run_qr_iter_tests();
 }

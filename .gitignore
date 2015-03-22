@@ -28,7 +28,7 @@
 *.x86_64
 *.hex
 
-eigenQR
+eigen_qr
 matlib
-eigenQR_test
+eigen_qr_test
 matlib
