@@ -7,6 +7,8 @@
 
 /**
  * Test module. Test data is located in test_data directory.
+ * http://www.bluebit.gr/matrix-calculator/
+ * was used to calculate the expected results.
  */
 
 static const float TRESHOLD = 0.000001f;
@@ -59,9 +61,15 @@ void run_qr_decom_tests(void)
     /* Perform qr decomposition. */
     qr_decomposition(u, q, r);
 
+    //printf("Expected:\n");
+    //print_matrix_data(stdout, expected_q);
+    //printf("Actual:\n");
+    //print_matrix_data(stdout, q);
+
+
     /* Check the result. */
-    assert(equal(expected_q, q, TRESHOLD));
-    assert(equal(expected_r, r, TRESHOLD));
+    assert(equal_matrix(expected_q, q, TRESHOLD));
+    assert(equal_matrix(expected_r, r, TRESHOLD));
 
     /* Free the memory used for matrices. */
     destroy_matrix(u);
@@ -80,10 +88,65 @@ void run_qr_decom_tests(void)
  */
 void run_qr_iter_tests(void)
 {
+  size_t test_count, t, m, n;
+  FILE* fp = NULL;
+  matrix* a = NULL;
+  matrix* a_k = NULL;
 
+  /* Read the input test file. */
+  fp = fopen("../test_data/qr_iter_test.txt", "r");
+  if (fp == NULL) 
+  {
+    perror("Failed to open qr_iter_test.txt");
+    exit(EXIT_FAILURE);
+  }
+
+  /* Read the number of test cases. */
+  fscanf(fp, "%zu", &test_count);
+  
+  /* Test each of the test samples. */
+  for (t = 0; t < test_count; t++)
+  {
+    /* Read the dimensions of the input matrix. */
+    fscanf(fp, "%zu %zu", &m, &n);
+
+    /* Allocate the memory for the matrices. */
+    a = new_matrix(m, n);
+    a_k = new_matrix(m, n);
+
+    /* Read the input matrix. */
+    read_matrix_data(fp, a);
+
+    /* Allocate memory for eigen values. */
+    float eigen_values[m];
+    float expected_eigen_values[m];
+
+    /* Read the expected eigen values. */
+    read_vector_data(fp, expected_eigen_values, m);
+
+    /* Perform qr iterations. */
+    qr_iterations(a, a_k);
+
+    /* Extract the eigen values obtained. */
+    extract_diagonal(a_k, eigen_values, m);
+
+    /* Check the rsult. */
+    assert(equal_vector(expected_eigen_values, m, eigen_values, m, TRESHOLD));
+
+    /* Free the memory used for matrices. */
+    destroy_matrix(a);
+    destroy_matrix(a_k);
+  }
+
+  /* Close the input file. */
+    fclose(fp);
 }
 
 int main(void)
 {
-  return 0;
+  /* Test qr decomposition. */
+  run_qr_decom_tests();
+
+  /* Test qr iterations. */
+  run_qr_iter_tests();
 }

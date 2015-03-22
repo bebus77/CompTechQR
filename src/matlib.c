@@ -224,23 +224,21 @@ print_matrix_data(FILE* fp, matrix* mat)
 }
 
 void 
-print_diagonal(FILE* fp, matrix* mat)
+extract_diagonal(matrix* a, float* diag, size_t n)
 {
-  assert(fp != NULL && mat != NULL);
-  assert(mat->m == mat->n);
+  assert(a != NULL && diag != NULL);
+  assert(a->m == a->n && a->n == n);
 
   size_t i;
 
-  for (i = 0; i < mat->m; i++)
+  for (i = 0; i < n; i++)
   {
-    fprintf(fp, "% f ", mat->data[i][i]);
+    diag[i] = a->data[i][i];
   }
-
-  fprintf(fp, "\n"); 
 }
 
 bool
-equal(matrix* a, matrix* b, float treshold)
+equal_matrix(matrix* a, matrix* b, float treshold)
 {
   assert(a != NULL && b != NULL);
 
@@ -262,5 +260,54 @@ equal(matrix* a, matrix* b, float treshold)
     }
   }
   return true;
+}
+
+bool 
+equal_vector(float* v1, size_t l1, float* v2, size_t l2, float treshold)
+{
+  assert(v1 != NULL && v2 != NULL);
+
+  size_t i;
+
+  if (l1 != l2)
+  {
+    return false;
+  }
+
+  for (i = 0; i < l1; i++)
+  {
+    if (abs(v1[i] - v2[i]) > treshold)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+void 
+read_vector_data(FILE* fp, float* v, size_t len)
+{
+  assert(fp != NULL && v != NULL);
+
+  size_t i;
+
+  for (i = 0; i < len; i++)
+  {
+    fscanf(fp, "%f", &(v[i]));
+  }
+}
+
+void 
+print_vector(FILE* fp, float* v, size_t len)
+{
+  assert(fp != NULL && v != NULL);
+
+  size_t i;
+
+  for (i = 0; i < len; i++)
+  {
+    fprintf(fp, "% f ", v[i]);
+  }
+  fprintf(fp, "\n");
 }
 

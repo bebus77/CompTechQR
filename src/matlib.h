@@ -84,13 +84,28 @@ void assign_matrix(matrix* a, matrix* b);
  void fill_zero(matrix* a);
 
 /**
- * Prints diagonal elements of the square matrix.  
+ * Extracts the values of the diagonal of a and places them into diag.
  */
-void print_diagonal(FILE* fp, matrix* a);
+void extract_diagonal(matrix* a, float* diag, size_t n);
 
 /**
  * Compares if two matrices are equal according to the given treshold.
  */
-bool equal(matrix* a, matrix* b, float treshold);
+bool equal_matrix(matrix* a, matrix* b, float treshold);
+
+/**
+ * Compares if two vectors are equal according to the given treshhold.
+ */
+bool equal_vector(float* v1, size_t l1, float* v2, size_t l2, float treshold);
+
+/**
+ * Reads vector data from fp.
+ */
+void read_vector_data(FILE* fp, float* v, size_t len);
+
+/**
+ * Prints vector to fp.
+ */
+void print_vector(FILE* fp, float* v, size_t len);
 
 #endif /* src/matlib.h */
