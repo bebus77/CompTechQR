@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 
   /* Read the input. */
   //fp = fopen("input.txt", "r");
-  fp = fopen("power_iter.txt", "r");
+  fp = fopen("../test_data/power_iter.txt", "r");
   if (fp == NULL)
   {
     perror("Failed to open input.txt");

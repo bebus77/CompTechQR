@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 /** 
  * Matrix library. 
@@ -81,5 +82,15 @@ void assign_matrix(matrix* a, matrix* b);
  * Fills matrix with zeroes.
  */
  void fill_zero(matrix* a);
+
+/**
+ * Prints diagonal elements of the square matrix.  
+ */
+void print_diagonal(FILE* fp, matrix* a);
+
+/**
+ * Compares if two matrices are equal according to the given treshold.
+ */
+bool equal(matrix* a, matrix* b, float treshold);
 
 #endif /* src/matlib.h */

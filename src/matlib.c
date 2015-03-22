@@ -222,3 +222,45 @@ print_matrix_data(FILE* fp, matrix* mat)
     fprintf(fp, "\n");
   } 
 }
+
+void 
+print_diagonal(FILE* fp, matrix* mat)
+{
+  assert(fp != NULL && mat != NULL);
+  assert(mat->m == mat->n);
+
+  size_t i;
+
+  for (i = 0; i < mat->m; i++)
+  {
+    fprintf(fp, "% f ", mat->data[i][i]);
+  }
+
+  fprintf(fp, "\n"); 
+}
+
+bool
+equal(matrix* a, matrix* b, float treshold)
+{
+  assert(a != NULL && b != NULL);
+
+  size_t i, j;
+
+  if (a->m != b->m || a->n != b->n)
+  {
+    return false;
+  }
+
+  for (i = 0; i < a->m; i++)
+  {
+    for (j = 0; j < a->n; j++)
+    {
+      if (abs(a->data[i][j] - b->data[i][j]) > treshold)
+      {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
