@@ -6,7 +6,7 @@ Functions for performing QR iterations and QR decomposition are located inside
 the eigen_qr.c while matlib.c provides matrix utility functions.
 main.c is a small demo program which takes input from the input.txt
 file and runs qr decomposition and qr iterations. More details
-about the input and output format are specified in the main.c file.
+about the input and output format are specified inside the main.c file.
 Instructions for running demo:
 
 cd src

@@ -5,7 +5,7 @@
 #include "eigen_qr.h"
 
 /* Convergence treshold. */
-static float TRESHOLD = 0.00001;
+static const float TRESHOLD = 0.0000001f;
 
 /* Maximal number of iterations. */
 static const size_t MAX_ITER_CNT = 1000000;
@@ -13,6 +13,12 @@ static const size_t MAX_ITER_CNT = 1000000;
 /* Calculates convergance measure for power iterations. */
 static bool converged(matrix* a_k, matrix* a_k1);
 
+/**
+ * Performs QR iterations.
+ *
+ * @param a   Matrix on which qr iterations are to be performed.
+ * @param a_k Matrix where the result of the qr iterations on a will be stored.
+ */
 void
 qr_iterations(matrix* a, matrix* a_k)
 {
@@ -57,6 +63,13 @@ qr_iterations(matrix* a, matrix* a_k)
   destroy_matrix(a_k1);
 }
 
+/**
+ * Performs qr decomposition.
+ *
+ * @param u Matrix to be decomposed.
+ * @param q Matrix where Q will be written.
+ * @param r Matrix where R will be written.
+ */
 void
 qr_decomposition(matrix* u, matrix* q, matrix* r)
 {

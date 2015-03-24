@@ -12,7 +12,7 @@
  */
 
 /* Threshold used for equality comparisons. */
-static const float TRESHOLD = 0.0001f;
+static const float TRESHOLD = 0.0000001f;
 
 static void run_qr_decom_tests(void);
 static void run_qr_iter_tests(void);
