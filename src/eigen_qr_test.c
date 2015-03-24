@@ -125,7 +125,7 @@ void run_qr_iter_tests(void)
     /* Extract the eigen values obtained. */
     extract_diagonal(a_k, eigen_values, m);   
 
-    /* Check the rsult. */
+    /* Check the result. */
     assert(equal_vector(expected_eigen_values, m, eigen_values, m, TRESHOLD));
 
     /* Free the memory used for matrices. */

@@ -7,6 +7,9 @@
 /* Convergence treshold. */
 static float TRESHOLD = 0.00001;
 
+/* Maximal number of iterations. */
+static const size_t MAX_ITER_CNT = 1000000;
+
 /* Calculates convergance measure for power iterations. */
 static bool converged(matrix* a_k, matrix* a_k1);
 
@@ -15,6 +18,8 @@ qr_iterations(matrix* a, matrix* a_k)
 {
   assert(a != NULL && a_k != NULL);
   assert(a->m == a->n && a->m == a_k->m);
+ 
+  size_t k = 0;
 
   /* Allocate working matrices. */
   matrix* a_k1 = new_matrix(a->m, a->n);
@@ -24,7 +29,8 @@ qr_iterations(matrix* a, matrix* a_k)
   /* A1 = A */
   assign_matrix(a_k, a);
 
-  /* Perform the qr iterations until convergence condition is not satisfied. */
+  /* Perform the qr iterations until convergence condition is not satisfied
+     or the maximal allowed number of iterations has been performed. */
   while (1)
   {
     /* Qk, Rk = qr(Ak) */
@@ -33,14 +39,16 @@ qr_iterations(matrix* a, matrix* a_k)
     /* Ak+1 = Rk Qk */
     matrix_mul(r, q, a_k1);
 
-    /* Check if the matrix converged. */
-    if (converged(a_k, a_k1))
+    /* Check if the matrix converged or the maximal number of iterations 
+       has been exceeded (the matrix does not converge). */
+    if (converged(a_k, a_k1) || k > MAX_ITER_CNT)
     {
       break;
-    }
+    } 
 
     /* Ak = Ak+1 */
     assign_matrix(a_k, a_k1);
+    k++;
   }
 
   /* Free memory used by working matrices. */
